@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  dotnet-api-1:
+    build:
+      context: ../dotnet-api-1
+      dockerfile: Dockerfile
+      args:
+        - DOTNET_VERSION=${DOTNET_VERSION}
+        - APP_DLL=${APP_DLL}
+    container_name: ${API_CONTAINER_NAME}
+    ports:
+      - "${HTTP_PORT}:80"
+      - "${HTTPS_PORT}:443"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=${ENVIRONMENT}
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/app/cert/cert.pfx
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=${CERT_PASSWORD}
+    volumes:
+      - ../dotnet-api-1/cert:/app/cert
+      - ../dotnet-api-1/logs:/app/logs
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: ${API_CPU_LIMIT}
+          memory: ${API_MEMORY_LIMIT}

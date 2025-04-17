@@ -1,0 +1,33 @@
+# Docker files
+.env
+*.env
+.dockerignore
+
+# .NET Core
+**/publish/
+**/bin/
+**/obj/
+**/logs/
+**/cert/
+*.pfx
+*.pem
+*.key
+*.crt
+
+# File systems
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.userprefs
+
+# Temp files
+*~
+*.swp
+*.tmp

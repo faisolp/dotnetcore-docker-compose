@@ -1,0 +1,27 @@
+version: '3.8'
+
+# ไฟล์ docker-compose หลัก ที่รวม services ทั้งหมด
+services:
+  # dotnet-api-1: service API  ตัวที่ 1
+  dotnet-api-1:
+    extends:
+      file: ./compose-extends/dotnet-api-1.yml
+      service: dotnet-api-1
+    env_file:
+      - ./dotnet-api-1/.env
+    networks:
+      - backend-network
+
+  # dotnet-api-2: service API ตัวที่ 2
+  #dotnet-api-2:
+  #  extends:
+  #    file: ./compose-extends/dotnet-api-2.yml
+  #   service: dotnet-api-2
+  #  env_file:
+  #    - ./dotnet-api-2/.env
+  #  networks:
+  #    - backend-network
+
+networks:
+  backend-network:
+    driver: bridge
