@@ -1,0 +1,37 @@
+services:
+    uatapiebidding.epg.co.th:
+          build: 
+            context: ../uatapiebidding.epg.co.th
+            dockerfile: Dockerfile
+            args:
+                - DOTNET_VERSION=9.0
+                - APP_DLL=APIOData.dll
+          container_name: uatapiebidding.epg.co.th
+
+          env_file:
+            - ../uatapiebidding.epg.co.th/.env
+          volumes:
+            - ../uatapiebidding.epg.co.th/logs:/app/logs
+
+          ports:
+            - "3085:80"
+
+          environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+
+
+          logging:
+            driver: "json-file"
+            options:
+              max-size: "200k"
+              max-file: "10"
+
+          environment:
+    
+              - PORT =3085
+          restart: unless-stopped
+          deploy:
+            resources:
+                limits:
+                cpus: 1.0
+                memory: 512M

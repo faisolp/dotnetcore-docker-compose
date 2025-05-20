@@ -9,8 +9,8 @@ EXPOSE 443
 COPY ./publish/ .
 
 # ตั้งค่า Environment Variables
-ENV ASPNETCORE_URLS=http://+:80;https://+:443
+ENV ASPNETCORE_URLS=http://+:80
 
 # เรียกใช้แอปพลิเคชัน (รับชื่อไฟล์จาก ARG)
-ARG APP_DLL=YourApiProject.dll
-ENTRYPOINT ["dotnet", "$APP_DLL"]
+ARG APP_DLL=APIOData.dll
+ENTRYPOINT ["dotnet", $APP_DLL]

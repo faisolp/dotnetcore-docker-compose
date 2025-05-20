@@ -1,27 +1,20 @@
-version: '3.8'
-
-# ไฟล์ docker-compose หลัก ที่รวม services ทั้งหมด
+version: "3.3"
 services:
-  # dotnet-api-1: service API  ตัวที่ 1
-  dotnet-api-1:
+  
+
+  uatapiebidding.epg.co.th:
     extends:
-      file: ./compose-extends/dotnet-api-1.yml
-      service: dotnet-api-1
+      file: ./extends-compose/uatapiebidding.epg.co.th.yml
+      service: uatapiebidding.epg.co.th
     env_file:
-      - ./dotnet-api-1/.env
+      - ./uatapiebidding.epg.co.th/.env
     networks:
-      - backend-network
-
-  # dotnet-api-2: service API ตัวที่ 2
-  #dotnet-api-2:
-  #  extends:
-  #    file: ./compose-extends/dotnet-api-2.yml
-  #   service: dotnet-api-2
-  #  env_file:
-  #    - ./dotnet-api-2/.env
-  #  networks:
-  #    - backend-network
-
+            my_network:
+                ipv4_address: 172.15.0.7
 networks:
-  backend-network:
+  my_network:
     driver: bridge
+    ipam:
+      config:
+        - subnet: 172.15.0.0/16
+
